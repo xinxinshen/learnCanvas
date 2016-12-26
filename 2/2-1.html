@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo2-1</title>
+    <style>
+        /*#myCanvas {*/
+            /*width: 1000px;*/
+            /*height: 1000px;*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="1000"></canvas>
+    <script type="text/javascript">
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "red";
+        ctx.beginPath();
+        ctx.moveTo(10, 10);
+        ctx.lineTo(150, 50);
+        ctx.stroke();
+
+        ctx.lineCap = 'butt';
+        ctx.beginPath();
+        ctx.moveTo(10, 60);
+        ctx.lineTo(150, 60);
+        ctx.stroke();
+
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(10, 100);
+        ctx.lineTo(150, 100);
+        ctx.stroke();
+
+        ctx.lineCap = 'square';
+        ctx.beginPath();
+        ctx.moveTo(10, 140);
+        ctx.lineTo(150, 140);
+        ctx.stroke();
+
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.strokeRect(10, 180, 150, 100);
+
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.fillRect(10, 300, 150, 100);
+
+        ctx.fillStyle = "purple";
+        ctx.beginPath();
+        ctx.rect(10, 420, 150, 100);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(220, 60, 50, 0, 130 * Math.PI / 180, true);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(220, 120, 50, 0, 130 * Math.PI / 180, false);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(220, 240, 50, 0, 130 * Math.PI / 180, true);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(220, 300, 50, 0, 130 * Math.PI / 180, false);
+        ctx.fill();
+
+
+    </script>
+</body>
+</html>
