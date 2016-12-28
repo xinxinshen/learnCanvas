@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo3-4画板</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="300"></canvas>
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, 600, 300);
+
+        var onoff = false;
+        var oldx = -10;
+        var oldy = -10;
+
+        var linecolor = "white";
+        var linewidth = 4;
+        c.addEventListener("mousemove", draw, true);
+        c.addEventListener("mousedown", down, false);
+        c.addEventListener("mouseup", up, false);
+
+        function down( event ) {
+            onoff = true;
+            oldx = event.pageX - 10;
+            oldy = event.pageY - 10;
+        }
+
+        function up() {
+            onoff = false;
+        }
+
+        function draw( event ) {
+            if( onoff == true ) {
+                var newx = event.pageX - 10;
+                var newy = event.pageY - 10;
+                ctx.beginPath();
+                ctx.moveTo(oldx, oldy);
+                ctx.lineTo(newx, newy);
+                ctx.strokeStyle = linecolor;
+                ctx.lineWidth = linewidth;
+                ctx.lineCap = "round";
+                ctx.stroke();
+
+                oldx = newx;
+                oldy = newy;
+            }
+        }
+    </script>
+</body>
+</html>
