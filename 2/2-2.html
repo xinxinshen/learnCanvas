@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo2-2</title>
+</head>
+<body>
+<!--<img src="http://h0.hucdn.com/open/201652/0551b5c50a127a22_750x300.jpg" alt="" id="myImage">-->
+    <canvas id="myCanvas" width="800" height="800"></canvas>
+    <script type="text/javascript">
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+
+      //  var img = document.getElementById("myImage");
+        var img = new Image();
+        img.src = "baby.jpg";
+        img.onload = function(){
+            ctx.drawImage(img, 10, 10);
+            ctx.drawImage(img, 10, 320, 375, 150);
+            ctx.drawImage(img, 330, 0, 120, 120, 400, 320, 120, 120);
+
+            var imgData = ctx.getImageData(350, 50, 300, 200);
+            ctx.putImageData(imgData, 10, 500);
+
+            var imgData1 = ctx.createImageData(imgData);
+            for ( var i = 0; i < imgData1.width * imgData1.height * 4; i += 4 ) {
+                imgData1.data[i + 0] = 255;
+                imgData1.data[i + 1] = 0;
+                imgData1.data[i + 2] = 0;
+                imgData1.data[i + 3] = 255;
+            }
+            ctx.putImageData(imgData1, 320, 500);
+
+            var imgData2 = ctx.createImageData(100, 100);
+            for ( var i = 0; i < imgData2.width * imgData2.height * 4; i += 4 ) {
+                imgData2.data[i + 0] = 255;
+                imgData2.data[i + 1] = 0;
+                imgData2.data[i + 2] = 0;
+                imgData2.data[i + 3] = 255;
+            }
+            ctx.putImageData(imgData2, 630, 500);
+        }
+    </script>
+</body>
+</html>

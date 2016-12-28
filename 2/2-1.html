@@ -22,6 +22,7 @@
         ctx.lineTo(150, 50);
         ctx.stroke();
 
+        // 线条
         ctx.lineCap = 'butt';
         ctx.beginPath();
         ctx.moveTo(10, 60);
@@ -40,6 +41,7 @@
         ctx.lineTo(150, 140);
         ctx.stroke();
 
+        // 矩形
         ctx.lineWidth = 5;
         ctx.beginPath();
         ctx.strokeRect(10, 180, 150, 100);
@@ -48,11 +50,13 @@
         ctx.beginPath();
         ctx.fillRect(10, 300, 150, 100);
 
+
         ctx.fillStyle = "purple";
         ctx.beginPath();
         ctx.rect(10, 420, 150, 100);
         ctx.fill();
 
+        // 圆形
         ctx.beginPath();
         ctx.arc(220, 60, 50, 0, 130 * Math.PI / 180, true);
         ctx.stroke();
@@ -69,6 +73,165 @@
         ctx.arc(220, 300, 50, 0, 130 * Math.PI / 180, false);
         ctx.fill();
 
+        // 圆角矩形
+        ctx.strokeStyle = "blue";
+        ctx.beginPath();
+        ctx.moveTo(360, 20);
+        ctx.lineTo(480, 20);
+        ctx.arcTo(500, 20, 500, 40, 20);
+        ctx.lineTo(500, 140);
+        ctx.arcTo(500, 160, 480, 160, 20);
+        ctx.lineTo(360, 160);
+        ctx.arcTo(340, 160, 340, 140, 20);
+        ctx.lineTo(340, 40);
+        ctx.arcTo(340, 20, 360, 20, 20);
+        ctx.stroke();
+
+        // clearRect
+        ctx.fillStyle = "green";
+        ctx.fillRect(360, 200, 120, 80);
+        ctx.clearRect(380, 220, 40, 40);
+
+        // 二次贝塞尔曲线
+        ctx.beginPath();
+        ctx.moveTo(360, 400);
+        ctx.quadraticCurveTo(280, 350, 460, 320);
+        ctx.stroke();
+
+        // 三次贝塞尔曲线
+        ctx.beginPath();
+        ctx.moveTo(360, 500);
+        ctx.bezierCurveTo(312, 380, 560, 380, 560, 540);
+        ctx.stroke();
+        ctx.closePath();
+
+
+        var pointX = 720,
+                pointY = 180,
+                p1x = pointX - 50,
+                p1y = pointY - 50,
+                p2x = pointX,
+                p2y = pointY - 150,
+                p3x = pointX + 50,
+                p3y = pointY - 100,
+
+                o1x = pointX + 100,
+                o1y = pointY - 150,
+                o2x = pointX + 150,
+                o2y = pointY - 50,
+                o3x = pointX + 100,
+                o3y = pointY,
+
+                i1x = pointX + 150,
+                i1y = pointY + 50,
+                i2x = pointX + 100,
+                i2y = pointY + 150,
+                i3x = pointX + 50,
+                i3y = pointY + 100,
+
+                u1x = pointX,
+                u1y = pointY + 150,
+                u2x = pointX - 50,
+                u2y = pointY + 50,
+                u3x = pointX,
+                u3y = pointY,
+
+                qx = pointX + 50,
+                qy = pointY - 100,
+
+                wx = pointX + 100,
+                wy = pointY,
+
+                ex = pointX + 50,
+                ey = pointY + 100;
+
+        ctx.beginPath();
+        ctx.moveTo(pointX, pointY);
+        ctx.bezierCurveTo(p1x, p1y, p2x, p2y, p3x, p3y);
+        ctx.bezierCurveTo(o1x, o1y, o2x, o2y, o3x, o3y);
+        ctx.bezierCurveTo(i1x, i1y, i2x, i2y, i3x, i3y);
+        ctx.bezierCurveTo(u1x, u1y, u2x, u2y, u3x, u3y);
+        ctx.moveTo(pointX, pointY);
+        ctx.lineTo(qx, qy);
+        ctx.lineTo(wx, wy);
+        ctx.lineTo(ex, ey);
+        ctx.lineTo(pointX, pointY);
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+
+        // 绘制文字
+        ctx.font = " italic bold 30px Arial";
+        ctx.fillText("Hello, world", 520, 250, 100);
+
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#ff4965";
+        ctx.font = " 300 50px Microsoft Heiti";
+        ctx.strokeText("创造价值", 520, 360);
+
+        // 文字对齐
+        ctx.moveTo(150, 550);
+        ctx.lineTo(150, 900);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.textAlign = "start";
+        ctx.font = "30px Arial";
+        ctx.fillText("Hello World", 150, 600);
+
+        ctx.textAlign = "end";
+        ctx.fillText("Hello World", 150, 650);
+
+        ctx.textAlign = "left";
+        ctx.fillText("Hello World", 150, 700);
+
+        ctx.textAlign = "center";
+        ctx.fillText("Hello World", 150, 750);
+
+        ctx.textAlign = "right";
+        ctx.fillText("Hello World", 150, 800);
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "alphabetic";
+        ctx.fillText("Canvas is funny [alphabetic]", 650, 600);
+        ctx.moveTo(550, 600);
+        ctx.lineTo(750, 600);
+        ctx.stroke();
+
+        ctx.textBaseline = "bottom";
+        ctx.fillText("Canvas is funny [bottom]", 650, 650);
+        ctx.moveTo(550, 650);
+        ctx.lineTo(750, 650);
+        ctx.stroke();
+        ctx.textBaseline = "ideographic";
+        ctx.fillText("Canvas is funny [ideographic]", 650, 700);
+        ctx.moveTo(550, 700);
+        ctx.lineTo(750, 700);
+        ctx.stroke();
+        ctx.textBaseline = "middle";
+        ctx.fillText("Canvas is funny [middle]", 650, 750);
+        ctx.moveTo(550, 750);
+        ctx.lineTo(750, 750);
+        ctx.stroke();
+        ctx.textBaseline = "top";
+        ctx.fillText("Canvas is funny [top]", 650, 800);
+        ctx.moveTo(550, 800);
+        ctx.lineTo(750, 800);
+        ctx.stroke();
+
+        ctx.textBaseline = "hanging";
+        ctx.fillText("Canvas is funny [hanging]", 650, 850);
+        ctx.moveTo(550, 850);
+        ctx.lineTo(750, 850);
+        ctx.stroke();
+
+
+        // clip函数
+        ctx.arc(560, 80, 40, 0, 2 * Math.PI, true);
+        ctx.clip();
+        ctx.beginPath();
+        ctx.fillStyle = "lightBlue";
+        ctx.fillRect(500, 10, 200, 200);
+        ctx.closePath();
 
     </script>
 </body>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo3-3</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="1000"></canvas>
+</body>
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+
+    // 1. 线性渐变
+    var grdLinear = ctx.createLinearGradient(0, 0, 200, 0);
+    grdLinear.addColorStop(0.2, "#00ff00");
+    grdLinear.addColorStop(0.8, "#ff0000");
+    ctx.fillStyle = grdLinear;
+    ctx.fillRect(0, 0, 200, 100);
+
+    // 2. 径向渐变
+    var grdRadial = ctx.createRadialGradient(320, 100, 10, 320, 100, 80);
+    grdRadial.addColorStop(0, "#00ff00");
+    grdRadial.addColorStop(1, "#ff0000");
+    ctx.fillStyle = grdRadial;
+    ctx.fillRect(220, 0, 200, 200);
+
+    //3. 颜色合成
+    ctx.fillStyle = "#00ff00";
+    ctx.fillRect(10, 300, 50, 50);
+    ctx.globalCompositeOperation = "source-over";
+//    ctx.globalCompositeOperation = "copy";
+//    ctx.globalCompositeOperation = "darker";
+//    ctx.globalCompositeOperation = "destination-atop";
+//    ctx.globalCompositeOperation = "destination-in";
+//    ctx.globalCompositeOperation = "destination-out";
+//    ctx.globalCompositeOperation = "destination-over";
+//    ctx.globalCompositeOperation = "lighter";
+//    ctx.globalCompositeOperation = "source-atop";
+//    ctx.globalCompositeOperation = "source-in";
+//    ctx.globalCompositeOperation = "source-out";
+//    ctx.globalCompositeOperation = "source-over";
+//    ctx.globalCompositeOperation = "xor";
+
+    ctx.beginPath();
+    ctx.fillStyle = "#ff0000";
+    ctx.arc(60, 350, 30, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+
+    // 颜色反转
+    var image = new Image();
+    image.src = "babyface.png";
+    image.onload= function () {
+        ctx.drawImage(image, 10, 400, 180, 180);
+        var imgData = ctx.getImageData(10, 400, 180, 180);
+
+        // 颜色反转
+        var pixels = imgData.data;
+        for(var i = 0, n = pixels.length; i < n; i += 4) {
+            pixels[i]= 255-pixels[i];
+            pixels[i+1] = 255-pixels[i+1];
+            pixels[i+2] = 255-pixels[i+2];
+        }
+        ctx.putImageData(imgData, 210, 400);
+
+        // 灰度控制
+        var imgData2 = ctx.getImageData(10, 400, 180, 180);
+        var pixels2 = imgData2.data;
+        for( i = 0, n = pixels2.length; i < n; i += 4) {
+            var grayscal = pixels2[i] * .3 + pixels2[i+1] * .59 + pixels2[i+2] * .11;
+            pixels2[i]= grayscal;
+            pixels2[i+1] = grayscal;
+            pixels2[i+2] = grayscal;
+        }
+        ctx.putImageData(imgData2, 410, 400);
+
+        // 阴影效果
+        ctx.shadowColor = "#ff0000";
+        ctx.shadowBlur = 10;          //羽化程度
+        ctx.shadowOffsetX = 20;
+        ctx.shadowOffsetY = 30;
+
+        ctx.drawImage(image, 610, 400, 180, 180);
+
+    }
+
+</script>
+</html>
