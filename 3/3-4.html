@@ -3,9 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>demo3-4画板</title>
+    <style>
+        .btn {
+            width: 80px;
+        }
+        .wid {
+            background-color: white;
+        }
+        #yellow {
+            background-color: yellow;
+        }
+        #blue {
+            background-color: blue;
+        }
+        #green {
+            background-color: green;
+        }
+        #white {
+            background-color: white;
+        }
+        #export {
+            background-color: pink;
+        }
+    </style>
+
 </head>
 <body>
     <canvas id="myCanvas" width="600" height="300"></canvas>
+    <br>
+    <button id="yellow" class="btn" onclick='linecolor="yellow";'>YELLOW</button>
+    <button id="blue" class="btn" onclick='linecolor="blue";'>BLUE</button>
+    <button id="green" class="btn" onclick='linecolor="green";'>GREEN</button>
+    <button id="white" class="btn" onclick='linecolor="white";'>WHITE</button>
+    <br>
+    <button id="width4" class="btn wid" onclick="linewidth = 4;">4px</button>
+    <button id="width8" class="btn wid" onclick="linewidth = 8;">8px</button>
+    <button id="width16" class="btn wid" onclick="linewidth = 16;">16px</button>
+    <br>
+    <button id="export" class="btn" onclick="copyimage();">EXPORT</button>
+    <br>
+    <img src="" alt="" id="image_png" width="600" height="300">
     <script>
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
@@ -47,6 +84,11 @@
                 oldx = newx;
                 oldy = newy;
             }
+        }
+
+        function copyimage(event) {
+            var img_png_src = c.toDataURL("image/png");
+            document.getElementById("image_png").src = img_png_src;
         }
     </script>
 </body>

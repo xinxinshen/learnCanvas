@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo4-1</title>
+    <script src="../lufylegend-1.10.1.min.js"></script>
+</head>
+<body>
+    <div id="mylegend">loading...</div>
+    <script>
+        var loader;
+        // init(speed, divid, width, height, completeFunc, type)
+        init(50, "mylegend", 500, 300, main);
+
+        // 图片的加载与显示
+        function main() {
+            loader = new LLoader();
+            loader.addEventListener(LEvent.COMPLETE, loadBitmapdata);
+            // 1. 使用Lloader类加载图片数据
+            loader.load("babyface.png", "bitmapData");
+        }
+
+        function loadBitmapdata(event) {
+            // 2. 将读取完的图片数据保存到LbitmapData中
+            var bitmapdata = new LBitmapData(loader.content);
+            // var bitmapdata = new LBitmapData(loader.content, 50, 50, 150, 150);
+            var bitmap = new LBitmap(bitmapdata);
+            var layer = new LSprite();
+            addChild(layer);
+            // 设置图片在canvas上的位置
+            bitmap.x = 50;
+            bitmap.y = 50;
+
+            // 图片旋转60度
+            bitmap.rotate = 60;
+
+            // 图片透明度设置为.4
+            bitmap.alpha = .4;
+
+            // 3. 利用Lbitmap将图片显示到画板上
+            layer.addChild(bitmap);
+
+            //图层定位和旋转
+            layer.x = 50;
+            layer.y = 50;
+        }
+    </script>
+</body>
+</html>
