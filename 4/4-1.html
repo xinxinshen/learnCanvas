@@ -10,8 +10,8 @@
     <script>
         var loader;
         // init(speed, divid, width, height, completeFunc, type)
-        init(50, "mylegend", 500, 300, main);
-
+        init(50, "mylegend", 800, 800, main);
+        var field;
         // 图片的加载与显示
         function main() {
             loader = new LLoader();
@@ -43,6 +43,63 @@
             //图层定位和旋转
             layer.x = 50;
             layer.y = 50;
+
+            // 绘制矩形
+            var graphics = new LGraphics();
+            addChild(graphics);
+            graphics.drawRect(1, '#000000', [50, 50, 100, 100]);
+            graphics.drawRect(1, '#000000', [170, 50, 100, 100], true, '#cccccc');
+
+            // 绘制圆
+            graphics.drawArc(1, '#ff0000', [340, 100, 50, 0, 360]);
+            graphics.drawArc(1, '#ff0000', [460, 100, 50, 0, 360], true, 'orange');
+
+            // 绘制任意多边形 顶点个数大于等于3个
+            graphics.drawVertices(1, '#00ff00', [[50, 220], [80, 260], [150, 220], [70, 300], [65, 260]], true, 'red');
+
+            // 绘制圆形区域的图片 || 矩形区域 || 多边形区域
+            var backLayer = new LSprite();
+            addChild(backLayer);
+            backLayer.graphics.beginBitmapFill(bitmapdata);
+            // backLayer.graphics.drawArc(1, 'black', [100, 100, 100, 0, Math.PI * 2]);
+            // backLayer.graphics.drawRect(1, 'black', [100, 100, 80, 160]);
+            backLayer.graphics.drawVertices(1, 'black', [[120, 50], [100, 200], [200, 150]]);
+            backLayer.x = 200;
+            backLayer.y = 200;
+
+            // 文本
+            var textLayer = new LSprite();
+            addChild(textLayer);
+
+            // 设置字体大小的时候会闪动...
+            field = new LTextField();
+            field.x = 50;
+            field.y = 50;
+            field.size = 30;
+            field.text = "Hello World";
+
+            field.color = "blue";
+            field.weight = "border";
+            textLayer.addChild(field);
+            textLayer.x = 200;
+            textLayer.y = 400;
+            textLayer.addEventListener(LMouseEvent.MOUSE_DOWN, downshow);
+            textLayer.addEventListener(LMouseEvent.MOUSE_UP, upshow);
+            // 输入框
+            var textField = new LTextField();
+            textField.x = 50;
+            textField.y = 200;
+            textField.setType(LTextFieldType.INPUT);
+            textLayer.addChild(textField);
+
+        }
+
+        function downshow(event) {
+            field.text = "Mouse Down!";
+        }
+
+        function upshow(event) {
+            field.text = "Mouse Up!";
         }
     </script>
 </body>
